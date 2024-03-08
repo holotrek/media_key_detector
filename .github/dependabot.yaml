@@ -1,0 +1,31 @@
+version: 2
+enable-beta-ecosystems: true
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pub"
+    directory: "/media_key_detector"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pub"
+    directory: "/media_key_detector/example"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pub"
+    directory: "/media_key_detector_platform_interface"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pub"
+    directory: "/media_key_detector_linux"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pub"
+    directory: "/media_key_detector_macos"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "pub"
+    directory: "/media_key_detector_windows"
+    schedule:
+      interval: "daily"
