@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   };
 
   void _mediaKeyListener(MediaKey mediaKey) {
+    debugPrint('$mediaKey pressed');
     if (keyPressed[mediaKey] == false) {
       setState(() => keyPressed[mediaKey] = true);
       Timer(const Duration(seconds: 3), () {
