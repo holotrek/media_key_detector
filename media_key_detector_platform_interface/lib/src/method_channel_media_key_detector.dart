@@ -12,4 +12,7 @@ class MethodChannelMediaKeyDetector extends MediaKeyDetectorPlatform {
   Future<String?> getPlatformName() {
     return methodChannel.invokeMethod<String>('getPlatformName');
   }
+
+  @override
+  void initialize() {}
 }

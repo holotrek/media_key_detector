@@ -9,6 +9,9 @@ class MediaKeyDetectorMock extends MediaKeyDetectorPlatform {
 
   @override
   void addListener(void Function(MediaKey mediaKey) listener) {}
+
+  @override
+  void initialize() {}
 }
 
 void main() {

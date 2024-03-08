@@ -4,11 +4,6 @@ import 'package:media_key_detector_platform_interface/media_key_detector_platfor
 
 /// The Windows implementation of [MediaKeyDetectorPlatform].
 class MediaKeyDetectorWindows extends MediaKeyDetectorPlatform {
-  /// Constructs a [MediaKeyDetectorWindows].
-  MediaKeyDetectorWindows() {
-    ServicesBinding.instance.keyboard.addHandler(defaultHandler);
-  }
-
   /// The method channel used to interact with the native platform.
   @visibleForTesting
   final methodChannel = const MethodChannel('media_key_detector_windows');
@@ -16,6 +11,11 @@ class MediaKeyDetectorWindows extends MediaKeyDetectorPlatform {
   /// Registers this class as the default instance of [MediaKeyDetectorPlatform]
   static void registerWith() {
     MediaKeyDetectorPlatform.instance = MediaKeyDetectorWindows();
+  }
+
+  @override
+  void initialize() {
+    ServicesBinding.instance.keyboard.addHandler(defaultHandler);
   }
 
   @override

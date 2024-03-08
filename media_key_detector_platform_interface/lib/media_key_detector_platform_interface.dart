@@ -46,6 +46,9 @@ abstract class MediaKeyDetectorPlatform extends PlatformInterface {
   /// Return the current platform name.
   Future<String?> getPlatformName();
 
+  /// Indicates that the platform should initialize.
+  void initialize();
+
   final List<void Function(MediaKey mediaKey)> _listeners = [];
 
   /// Listen for the media key event

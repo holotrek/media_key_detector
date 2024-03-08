@@ -4,8 +4,19 @@ import 'package:media_key_detector_platform_interface/media_key_detector_platfor
 
 /// The MacOS implementation of [MediaKeyDetectorPlatform].
 class MediaKeyDetectorMacOS extends MediaKeyDetectorPlatform {
-  /// Constructs a [MediaKeyDetectorMacOS].
-  MediaKeyDetectorMacOS() {
+  final _eventChannel = const EventChannel('media_key_detector_macos_events');
+
+  /// The method channel used to interact with the native platform.
+  @visibleForTesting
+  final methodChannel = const MethodChannel('media_key_detector_macos');
+
+  /// Registers this class as the default instance of [MediaKeyDetectorPlatform]
+  static void registerWith() {
+    MediaKeyDetectorPlatform.instance = MediaKeyDetectorMacOS();
+  }
+
+  @override
+  void initialize() {
     _eventChannel.receiveBroadcastStream().listen((event) {
       final keyIdx = event as int;
       MediaKey? key;
@@ -16,17 +27,6 @@ class MediaKeyDetectorMacOS extends MediaKeyDetectorPlatform {
         triggerListeners(key);
       }
     });
-  }
-
-  final _eventChannel = const EventChannel('media_key_detector_macos_events');
-
-  /// The method channel used to interact with the native platform.
-  @visibleForTesting
-  final methodChannel = const MethodChannel('media_key_detector_macos');
-
-  /// Registers this class as the default instance of [MediaKeyDetectorPlatform]
-  static void registerWith() {
-    MediaKeyDetectorPlatform.instance = MediaKeyDetectorMacOS();
   }
 
   @override

@@ -1,5 +1,7 @@
 import 'package:media_key_detector_platform_interface/media_key_detector_platform_interface.dart';
 
+MediaKeyDetectorPlatform get _platform => MediaKeyDetectorPlatform.instance;
+
 /// Contains methods to add/remove listeners for the media key
 class MediaKeyDetector {
   /// Contains methods to add/remove listeners for the media key
@@ -11,24 +13,24 @@ class MediaKeyDetector {
 
   static final MediaKeyDetector _singleton = MediaKeyDetector._internal();
 
-  final List<void Function(MediaKey mediaKey)> _listeners = [];
+  bool _initialized = false;
 
   /// Listen for the media key event
   void addListener(void Function(MediaKey mediaKey) listener) {
-    if (!_listeners.contains(listener)) {
-      _listeners.add(listener);
-    }
+    _lazilyInitialize();
+    _platform.addListener(listener);
   }
 
   /// Remove the previously registered listener
   void removeListener(void Function(MediaKey mediaKey) listener) {
-    _listeners.remove(listener);
+    _lazilyInitialize();
+    _platform.removeListener(listener);
   }
 
-  /// Trigger all listeners to indicate that the specified media key was pressed
-  void triggerListeners(MediaKey mediaKey) {
-    for (final l in _listeners) {
-      l(mediaKey);
+  void _lazilyInitialize() {
+    if (!_initialized) {
+      _platform.initialize();
+      _initialized = true;
     }
   }
 }
