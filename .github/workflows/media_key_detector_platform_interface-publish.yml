@@ -8,6 +8,9 @@ on:
   release:
     branches:
       - main
+    paths:
+      - ".github/workflows/media_key_detector_platform_interface.yaml"
+      - "media_key_detector_platform_interface/**"
     types: [published]
 
 jobs:
