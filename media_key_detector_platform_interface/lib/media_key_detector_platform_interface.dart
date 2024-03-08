@@ -1,18 +1,12 @@
+/// The base interface for media_key_detector
+library media_key_detector_platform_interface;
+
 import 'package:flutter/services.dart';
+import 'package:media_key_detector_platform_interface/src/media_key.dart';
 import 'package:media_key_detector_platform_interface/src/method_channel_media_key_detector.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-/// An enum representing the media key detected
-enum MediaKey {
-  /// The play/pause media button
-  playPause,
-
-  /// The rewind media button
-  rewind,
-
-  /// The fast-forward media button
-  fastForward,
-}
+export './src/exports.dart';
 
 /// The interface that implementations of media_key_detector must implement.
 ///

@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:media_key_detector_platform_interface/src/method_channel_media_key_detector.dart';
+import 'package:media_key_detector_platform_interface/media_key_detector_platform_interface.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +30,8 @@ void main() {
     tearDown(log.clear);
 
     test('getPlatformName', () async {
-      final platformName = await methodChannelMediaKeyDetector.getPlatformName();
+      final platformName =
+          await methodChannelMediaKeyDetector.getPlatformName();
       expect(
         log,
         <Matcher>[isMethodCall('getPlatformName', arguments: null)],
