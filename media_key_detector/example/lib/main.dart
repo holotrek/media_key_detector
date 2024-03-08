@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-                'Press a Media key on your keyboard to light the corresponding icon:'),
+                'Press a Media key on your keyboard to highlight the corresponding icon:'),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
