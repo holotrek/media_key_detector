@@ -1,5 +1,4 @@
 [![Pub][pub_badge]][pub_link]
-![coverage][coverage_badge]
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]
 
@@ -99,7 +98,6 @@ And also don't forget to star this package on GitHub <a href="https://github.com
 
 [pub_badge]: https://img.shields.io/pub/v/media_key_detector
 [pub_link]: https://pub.dev/packages/media_key_detector
-[coverage_badge]: coverage_badge.svg
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license_link]: https://opensource.org/licenses/MIT
 [logo_black]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_black.png#gh-light-mode-only
