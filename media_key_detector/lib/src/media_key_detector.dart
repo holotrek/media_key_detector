@@ -33,6 +33,13 @@ class MediaKeyDetector {
       _initialized = true;
     }
   }
+
+  /// Get whether the active audio player is currently playing.
+  Future<bool> getIsPlaying() => _platform.getIsPlaying();
+
+  /// Set whether the active audio player is currently playing.
+  Future<void> setIsPlaying({required bool isPlaying}) =>
+      _platform.setIsPlaying(isPlaying: isPlaying);
 }
 
 /// Global singleton instance of the [MediaKeyDetector]

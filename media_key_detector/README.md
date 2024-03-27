@@ -5,7 +5,10 @@
 
 # media_key_detector
 
-Triggers events when keyboard media keys are pressed.
+Triggers events when keyboard media keys are pressed. On MacOS, it registers
+your app as a [Now Playable App](https://developer.apple.com/documentation/mediaplayer/becoming_a_now_playable_app),
+allowing it to respond to media events, regardless of whether the event came
+from a keyboard, headset, or media remote.
 
 ## Features
 
@@ -56,6 +59,24 @@ import 'package:media_key_detector/media_key_detector.dart';
   void dispose() {
     mediaKeyDetector.removeListener(_mediaKeyListener);
     super.dispose();
+  }
+
+  /// The following two methods are only really needed if you're relying on
+  /// the plugin to track the playing state. On MacOS/iOS, this is helpful to
+  /// display the status in the "Command Center".
+
+  /// Get whether the media is playing. Note that it starts out "paused",
+  /// so if your app plays media on open, you should call
+  /// [mediaKeyDetector.setIsPlaying(true)]
+  Future<bool> getIsMediaPlaying() async {
+    return await mediaKeyDetector.getIsPlaying();
+  }
+
+  /// The app tracks the playing state when the user presses the media key,
+  /// but there are some cases, i.e. when a play button is pressed on the UI
+  /// interface, where you may need to set it yourself
+  Future play() async {
+    return await mediaKeyDetector.setIsPlaying(isPlaying: true);
   }
 ```
 

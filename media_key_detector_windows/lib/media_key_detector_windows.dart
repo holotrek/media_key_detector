@@ -4,6 +4,8 @@ import 'package:media_key_detector_platform_interface/media_key_detector_platfor
 
 /// The Windows implementation of [MediaKeyDetectorPlatform].
 class MediaKeyDetectorWindows extends MediaKeyDetectorPlatform {
+  bool _isPlaying = false;
+
   /// The method channel used to interact with the native platform.
   @visibleForTesting
   final methodChannel = const MethodChannel('media_key_detector_windows');
@@ -21,5 +23,15 @@ class MediaKeyDetectorWindows extends MediaKeyDetectorPlatform {
   @override
   Future<String?> getPlatformName() {
     return methodChannel.invokeMethod<String>('getPlatformName');
+  }
+
+  @override
+  Future<bool> getIsPlaying() async {
+    return _isPlaying;
+  }
+
+  @override
+  Future<void> setIsPlaying({required bool isPlaying}) async {
+    _isPlaying = isPlaying;
   }
 }

@@ -85,6 +85,12 @@ public class MediaKeyDetectorPlugin: NSObject, FlutterPlugin, FlutterAppLifecycl
         switch call.method {
         case "getPlatformName":
             result("MacOS")
+        case "getIsPlaying":
+            result(MPNowPlayingInfoCenter.default().playbackState == .playing)
+        case "setIsPlaying":
+            guard let args = call.arguments as? Dictionary<String, Any> else {return}
+            let isPlaying = args["isPlaying"] as! Bool
+            MPNowPlayingInfoCenter.default().playbackState = isPlaying ? .playing : .paused
         default:
             result(FlutterMethodNotImplemented)
         }

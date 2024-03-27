@@ -33,4 +33,17 @@ class MediaKeyDetectorMacOS extends MediaKeyDetectorPlatform {
   Future<String?> getPlatformName() {
     return methodChannel.invokeMethod<String>('getPlatformName');
   }
+
+  @override
+  Future<bool> getIsPlaying() async {
+    final isPlaying = await methodChannel.invokeMethod<bool>('getIsPlaying');
+    return isPlaying ?? false;
+  }
+
+  @override
+  Future<void> setIsPlaying({required bool isPlaying}) {
+    return methodChannel.invokeMethod<String>('setIsPlaying', <String, dynamic>{
+      'isPlaying': isPlaying,
+    });
+  }
 }

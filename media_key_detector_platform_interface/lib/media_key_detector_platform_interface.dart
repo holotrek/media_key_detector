@@ -40,6 +40,12 @@ abstract class MediaKeyDetectorPlatform extends PlatformInterface {
   /// Return the current platform name.
   Future<String?> getPlatformName();
 
+  /// Get whether the active audio player is currently playing.
+  Future<bool> getIsPlaying();
+
+  /// Set whether the active audio player is currently playing.
+  Future<void> setIsPlaying({required bool isPlaying});
+
   /// Indicates that the platform should initialize.
   void initialize();
 

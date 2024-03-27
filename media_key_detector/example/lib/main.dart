@@ -23,6 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String? _platformName;
+  bool _isPlaying = false;
   Map<MediaKey, bool> keyPressed = {
     MediaKey.playPause: false,
     MediaKey.rewind: false,
@@ -31,12 +32,22 @@ class _HomePageState extends State<HomePage> {
 
   void _mediaKeyListener(MediaKey mediaKey) {
     debugPrint('$mediaKey pressed');
+
+    mediaKeyDetector
+        .getIsPlaying()
+        .then((playing) => setState(() => _isPlaying = playing));
+
     if (keyPressed[mediaKey] == false) {
       setState(() => keyPressed[mediaKey] = true);
       Timer(const Duration(seconds: 3), () {
         setState(() => keyPressed[mediaKey] = false);
       });
     }
+  }
+
+  Future<void> _togglePlayPause() async {
+    setState(() => _isPlaying = !_isPlaying);
+    await mediaKeyDetector.setIsPlaying(isPlaying: _isPlaying);
   }
 
   @override
@@ -62,7 +73,9 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-                'Press a Media key on your keyboard to highlight the corresponding icon:'),
+                'Press a Media button on your IO device to highlight the corresponding icon.'),
+            const Text(
+                'Press the play/pause button to send now playing info to plugin.'),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -70,25 +83,33 @@ class _HomePageState extends State<HomePage> {
                   Icons.fast_rewind_rounded,
                   size: 40,
                   color: (keyPressed[MediaKey.rewind] ?? false)
-                      ? colors.primary
+                      ? colors.inversePrimary
                       : colors.onBackground,
                 ),
-                Icon(
-                  Icons.play_circle_rounded,
-                  size: 40,
-                  color: (keyPressed[MediaKey.playPause] ?? false)
-                      ? colors.primary
-                      : colors.onBackground,
+                IconButton.filled(
+                  onPressed: _togglePlayPause,
+                  style:
+                      IconButton.styleFrom(backgroundColor: colors.secondary),
+                  icon: Icon(
+                    _isPlaying
+                        ? Icons.pause_circle_rounded
+                        : Icons.play_circle_rounded,
+                    size: 40,
+                    color: (keyPressed[MediaKey.playPause] ?? false)
+                        ? colors.inversePrimary
+                        : colors.onPrimary,
+                  ),
                 ),
                 Icon(
                   Icons.fast_forward_rounded,
                   size: 40,
                   color: (keyPressed[MediaKey.fastForward] ?? false)
-                      ? colors.primary
+                      ? colors.inversePrimary
                       : colors.onBackground,
                 ),
               ],
             ),
+            Text('Is currently playing: $_isPlaying'),
             if (_platformName == null)
               const SizedBox.shrink()
             else
