@@ -1,0 +1,40 @@
+name: media_key_detector_windows-ci-pr
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/media_key_detector_windows-ci-pr.yml"
+      - "media_key_detector_windows/**"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/media_key_detector_windows-ci-pr.yml"
+      - "media_key_detector_windows/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./media_key_detector_windows
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.19.4"
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Analyze
+        run: flutter analyze
+      - name: Run tests
+        run: flutter test
+      - name: Format code
+        run: dart format --fix .
+      - name: Check Publish Warnings
+        run: dart pub publish --dry-run

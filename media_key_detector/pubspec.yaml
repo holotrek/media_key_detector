@@ -1,10 +1,11 @@
 name: media_key_detector
 description: A Very Good Project created by Very Good CLI.
 version: 0.0.1
-publish_to: none
+homepage: https://github.com/holotrek/media_key_detector
 
 environment:
   sdk: "^3.3.0"
+  flutter: ">=3.19.3"
 
 flutter:
   plugin:
@@ -20,14 +21,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  media_key_detector_linux:
-    path: ../media_key_detector_linux
-  media_key_detector_macos:
-    path: ../media_key_detector_macos
-  media_key_detector_platform_interface:
-    path: ../media_key_detector_platform_interface
-  media_key_detector_windows:
-    path: ../media_key_detector_windows
+  media_key_detector_linux: ^0.0.1
+  media_key_detector_macos: ^0.0.1
+  media_key_detector_platform_interface: ^0.0.1
+  media_key_detector_windows: ^0.0.1
 
 dev_dependencies:
   flutter_test:
