@@ -1,6 +1,6 @@
 name: media_key_detector_macos
 description: MacOS implementation of the media_key_detector plugin
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/holotrek/media_key_detector
 
 environment:
